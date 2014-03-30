@@ -1,0 +1,2 @@
+---
+r10k::params::remote: git@github.com:vchepkov/puppet-bootstrap.git
