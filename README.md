@@ -21,7 +21,8 @@ grep r10k_repo bootstrap.pp
 
 * Push bootstrap code in your repository (optional)
 
-* Make your environment ready
+* Deploy puppet configuration
 ```
 bash bootstrap.sh
+r10k deploy environment
 ```
