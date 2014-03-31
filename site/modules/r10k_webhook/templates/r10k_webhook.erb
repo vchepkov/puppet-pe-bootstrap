@@ -15,7 +15,7 @@ ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 opts = {
-        :Port               => <%= @port' %>,
+        :Port               => <%= @port %>,
         :Logger             => WEBrick::Log::new(LOGFILE, WEBrick::Log::DEBUG),
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => false,
