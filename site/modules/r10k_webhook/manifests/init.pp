@@ -1,6 +1,6 @@
-class webhooks (
-  $webhook_port = '9090',
-  $webhook_logdir = '/var/log/webhook',
+class r10k_webhook (
+  $port = '9090',
+  $logdir = '/var/log/webhook',
 ){
 
   package { 'sinatra':
@@ -8,7 +8,7 @@ class webhooks (
     provider => pe_gem,
   }
 
-  file { $webhook::webhook_logdir:
+  file { $r10k_webhook::logdir:
     ensure => directory,
     owner  => peadmin,
     group  => peadmin,

@@ -8,14 +8,14 @@ require 'json'
 
 DEPLOYCMD = '/opt/puppet/bin/mco r10k deploy_all --np'
 RUNCMD    = '/opt/puppet/bin/mco puppet runonce --np'
-LOGFILE   = '<%= @webhook['webhook_logdir'] %>/webhook.log'
-MCOLOG    = '<%= @webhook['webhook_logdir'] %>/mco.log'
+LOGFILE   = '<%= @r10k_webhook['logdir'] %>/webhook.log'
+MCOLOG    = '<%= @r10k_webhook['logdir'] %>/mco.log'
 
 ENV['HOME'] = '/var/lib/peadmin'
 ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
 
 opts = {
-        :Port               => <%= @webhook['webhook_port'] %>,
+        :Port               => <%= @r10k_webhook['port'] %>,
         :Logger             => WEBrick::Log::new(LOGFILE, WEBrick::Log::DEBUG),
         :ServerType         => WEBrick::Daemon,
         :SSLEnable          => false,
