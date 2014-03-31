@@ -1,2 +1,4 @@
 ---
-r10k::params::remote: git@github.com:vchepkov/puppet-bootstrap.git
+puppet-bootstrap::r10k_enable: true
+puppet-bootstrap::r10k_mco_enable: true
+puppet-bootstrap::r10k_repo: git@github.com:vchepkov/puppet-bootstrap.git

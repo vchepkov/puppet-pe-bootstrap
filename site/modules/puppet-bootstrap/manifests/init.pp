@@ -1,7 +1,7 @@
 class puppet-bootstrap (
   $r10k_enable = true,
   $r10k_mco_enable = false,
-  $r10k_repo = $r10k::params::remote,
+  $r10k_repo,
 ){
 
   require stdlib
