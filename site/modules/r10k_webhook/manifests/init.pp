@@ -1,6 +1,6 @@
 class r10k_webhook (
   $port = '9090',
-  $logdir = '/var/log/webhook',
+  $logdir = '/var/log/r10k_webhook',
 ){
 
   package { 'sinatra':
