@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'sinatra/base'
+require 'webrick'
+require 'resolv'
+require 'json'
+
+DEPLOYCMD = '/opt/puppet/bin/mco r10k deploy_all --np'
+RUNCMD    = '/opt/puppet/bin/mco puppet runonce --np'
+LOGFILE   = '<%= @webhook['webhook_logdir'] %>/webhook.log'
+MCOLOG    = '<%= @webhook['webhook_logdir'] %>/mco.log'
+
+ENV['HOME'] = '/var/lib/peadmin'
+ENV['PATH'] = '/sbin:/usr/sbin:/bin:/usr/bin:/opt/puppet/bin'
+
+opts = {
+        :Port               => <%= @webhook['webhook_port'] %>,
+        :Logger             => WEBrick::Log::new(LOGFILE, WEBrick::Log::DEBUG),
+        :ServerType         => WEBrick::Daemon,
+        :SSLEnable          => false,
+}
+
+class Server  < Sinatra::Base
+
+    set :static, false
+
+    get '/' do
+      raise Sinatra::NotFound
+    end
+
+    post '/deploy' do
+      deploy()
+    end
+
+    not_found do
+      halt 404, 'You shall not pass! (page not found)'
+    end
+
+    helpers do
+      def deploy()
+        begin
+          Process.detach(fork{ exec "(#{DEPLOYCMD} && #{RUNCMD}) >> #{MCOLOG} 2>&1 &"})
+          {:status => :success, :message => "Deploying environments."}.to_json
+        rescue
+          {:status => :fail, :message => "Deploy failed.", :trace => e.message}.to_json
+        end
+      end
+    end
+end
+
+Rack::Handler::WEBrick.run(Server, opts) do |server|
+        [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
+end
