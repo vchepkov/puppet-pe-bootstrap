@@ -1,6 +1,6 @@
-class puppet-bootstrap (
+class puppet_bootstrap (
   $r10k_enable = true,
-  $r10k_mco_enable = false,
+  $r10k_mco_enable = true,
   $r10k_repo,
 ){
 
@@ -13,7 +13,7 @@ class puppet-bootstrap (
       before => Stage['main'],
   }
 
-  class {'puppet-bootstrap::config':
+  class {'puppet_bootstrap::config':
     stage => 'bootstrap',
   }
   
@@ -26,7 +26,7 @@ class puppet-bootstrap (
   }
 }
 
-class puppet-bootstrap::config {
+class puppet_bootstrap::config {
   ini_setting { 'puppet master module path':
     path              => "$::settings::config",
     ensure            => present,
