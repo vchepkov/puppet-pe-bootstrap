@@ -9,7 +9,7 @@ Bootstrap puppet configuration to support multiple environments
 * Download bootstrap code
 ```
 git clone https://github.com/vchepkov/puppet-bootstrap.git
-cd puppet-bootstrap/site/modules/puppet-bootstrap/tests
+cd puppet-bootstrap/site/modules/puppet_bootstrap/tests
 ```
 
 * Modify bootstrap.pp to point to your puppet repository
