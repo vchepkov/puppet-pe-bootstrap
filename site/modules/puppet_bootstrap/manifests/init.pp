@@ -42,7 +42,7 @@ class puppet_bootstrap::config {
     key_val_separator => '=',
     section           => 'master',
     setting           => 'manifest',
-    value             => '$confdir/environments/$environment/manifests/site.pp',
+    value             => '$confdir/environments/$environment/manifests',
   }
 
   file { 'hiera_config':
